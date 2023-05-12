@@ -1,0 +1,36 @@
+﻿<Page x:Class="Zippers.Pages.ListPage2"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Zippers.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ListPage2">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="133*"/>
+            <RowDefinition Height="17*"/>
+        </Grid.RowDefinitions>
+        <ListView x:Name="ListTT2" Grid.Row="0" d:ItemsSource="{d:SampleData ItemCount=5}" >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <TextBlock Text="{Binding Id}" Grid.Column="0" Margin="5"/>
+                        <TextBlock Text="{Binding Title}" Grid.Column="1" Margin="5"/>
+                        <TextBlock Text="{Binding TypeZip.Title}" Grid.Column="2" Margin="5"/>
+                        <TextBlock Text="{Binding Color}" Grid.Column="3" Margin="5"/>
+                    </Grid>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <Button Grid.Row="1" Content="Добавить" Margin="5" x:Name="AddBt" Click="AddBt_Click"/>
+    </Grid>
+</Page>

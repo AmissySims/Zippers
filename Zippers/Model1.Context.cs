@@ -31,6 +31,7 @@ namespace Zippers
         public virtual DbSet<OrderManager> OrderManager { get; set; }
         public virtual DbSet<Owner> Owner { get; set; }
         public virtual DbSet<SferaZip> SferaZip { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<TypeZip> TypeZip { get; set; }
         public virtual DbSet<Zip> Zip { get; set; }
         public virtual DbSet<ZipSferaZip> ZipSferaZip { get; set; }

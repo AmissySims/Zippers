@@ -12,19 +12,23 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Zippers.Pages;
 
-namespace Zippers
+namespace Zippers.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для MainWindow.xaml
+    /// Логика взаимодействия для ListPage.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ListPage1 : Page
     {
-        public MainWindow()
+        public ListPage1()
         {
             InitializeComponent();
-            MainFrame.NavigationService.Navigate(new ListPage());
+            ListTT1.ItemsSource = App.db.Zip.ToList();
+        }
+
+        private void AddBt_Click(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new AddPage1());
         }
     }
 }

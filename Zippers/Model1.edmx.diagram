@@ -5,23 +5,24 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="c290df0c2b7f4f5d99fb6f44f1d4edc5" Name="Diagram1">
-        <EntityTypeShape EntityType="ZippersModel.Client" Width="1.5" PointX="5.25" PointY="8.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ZippersModel.Manager" Width="1.5" PointX="7.5" PointY="6.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ZippersModel.Order" Width="1.5" PointX="7.5" PointY="3.625" IsExpanded="true" />
-        <EntityTypeShape EntityType="ZippersModel.OrderManager" Width="1.5" PointX="9.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ZippersModel.Owner" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ZippersModel.SferaZip" Width="1.5" PointX="5.25" PointY="1.125" IsExpanded="true" />
-        <EntityTypeShape EntityType="ZippersModel.TypeZip" Width="1.5" PointX="3" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="ZippersModel.Zip" Width="1.5" PointX="5.25" PointY="3.5" IsExpanded="true" />
-        <EntityTypeShape EntityType="ZippersModel.ZipSferaZip" Width="1.5" PointX="7.5" PointY="0.75" IsExpanded="true" />
-        <AssociationConnector Association="ZippersModel.FK_Order_Client" ManuallyRouted="false" />
-        <AssociationConnector Association="ZippersModel.FK_OrderManager_Manager" ManuallyRouted="false" />
-        <AssociationConnector Association="ZippersModel.FK_Order_Zip" ManuallyRouted="false" />
-        <AssociationConnector Association="ZippersModel.FK_OrderManager_Order" ManuallyRouted="false" />
-        <AssociationConnector Association="ZippersModel.FK_TypeZip_Owner" ManuallyRouted="false" />
-        <AssociationConnector Association="ZippersModel.FK_ZipSferaZip_SferaZip" ManuallyRouted="false" />
-        <AssociationConnector Association="ZippersModel.FK_Zip_TypeZip" ManuallyRouted="false" />
-        <AssociationConnector Association="ZippersModel.FK_ZipSferaZip_Zip" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="ZippersModel.Client" Width="1.5" PointX="5.25" PointY="7.625" />
+        <EntityTypeShape EntityType="ZippersModel.Manager" Width="1.5" PointX="7.5" PointY="7.625" />
+        <EntityTypeShape EntityType="ZippersModel.Order" Width="1.5" PointX="7.5" PointY="0.75" />
+        <EntityTypeShape EntityType="ZippersModel.OrderManager" Width="1.5" PointX="9.75" PointY="0.875" />
+        <EntityTypeShape EntityType="ZippersModel.Owner" Width="1.5" PointX="0.75" PointY="3.875" />
+        <EntityTypeShape EntityType="ZippersModel.SferaZip" Width="1.5" PointX="5.25" PointY="1" />
+        <EntityTypeShape EntityType="ZippersModel.sysdiagrams" Width="1.5" PointX="0.75" PointY="7.125" />
+        <EntityTypeShape EntityType="ZippersModel.TypeZip" Width="1.5" PointX="3" PointY="3.875" />
+        <EntityTypeShape EntityType="ZippersModel.Zip" Width="1.5" PointX="5.25" PointY="3.625" />
+        <EntityTypeShape EntityType="ZippersModel.ZipSferaZip" Width="1.5" PointX="7.5" PointY="3.875" />
+        <AssociationConnector Association="ZippersModel.FK_Order_Client" />
+        <AssociationConnector Association="ZippersModel.FK_OrderManager_Manager" />
+        <AssociationConnector Association="ZippersModel.FK_Order_Zip" />
+        <AssociationConnector Association="ZippersModel.FK_OrderManager_Order" />
+        <AssociationConnector Association="ZippersModel.FK_TypeZip_Owner" />
+        <AssociationConnector Association="ZippersModel.FK_ZipSferaZip_SferaZip" />
+        <AssociationConnector Association="ZippersModel.FK_Zip_TypeZip" />
+        <AssociationConnector Association="ZippersModel.FK_ZipSferaZip_Zip" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
