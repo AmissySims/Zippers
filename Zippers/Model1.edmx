@@ -1,0 +1,573 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище ZippersModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Age" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Manager">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Age" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="ClientId" Type="int" />
+          <Property Name="ZipId" Type="int" />
+        </EntityType>
+        <EntityType Name="OrderManager">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="ManagerId" Type="int" />
+          <Property Name="OrderId" Type="int" />
+        </EntityType>
+        <EntityType Name="Owner">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Age" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="SferaZip">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="TypeZip">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" />
+          <Property Name="OwnerId" Type="int" />
+        </EntityType>
+        <EntityType Name="Zip">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" />
+          <Property Name="TypeZipId" Type="int" />
+          <Property Name="Color" Type="nvarchar" MaxLength="50" />
+          <Property Name="PurposeId" Type="int" />
+        </EntityType>
+        <EntityType Name="ZipSferaZip">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="ZipId" Type="int" />
+          <Property Name="SferaZipId" Type="int" />
+        </EntityType>
+        <Association Name="FK_Order_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Zip">
+          <End Role="Zip" Type="Self.Zip" Multiplicity="0..1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zip">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="ZipId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderManager_Manager">
+          <End Role="Manager" Type="Self.Manager" Multiplicity="0..1" />
+          <End Role="OrderManager" Type="Self.OrderManager" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Manager">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderManager">
+              <PropertyRef Name="ManagerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderManager_Order">
+          <End Role="Order" Type="Self.Order" Multiplicity="0..1" />
+          <End Role="OrderManager" Type="Self.OrderManager" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderManager">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TypeZip_Owner">
+          <End Role="Owner" Type="Self.Owner" Multiplicity="0..1" />
+          <End Role="TypeZip" Type="Self.TypeZip" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Owner">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TypeZip">
+              <PropertyRef Name="OwnerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Zip_TypeZip">
+          <End Role="TypeZip" Type="Self.TypeZip" Multiplicity="0..1" />
+          <End Role="Zip" Type="Self.Zip" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeZip">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Zip">
+              <PropertyRef Name="TypeZipId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ZipSferaZip_SferaZip">
+          <End Role="SferaZip" Type="Self.SferaZip" Multiplicity="0..1" />
+          <End Role="ZipSferaZip" Type="Self.ZipSferaZip" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SferaZip">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ZipSferaZip">
+              <PropertyRef Name="SferaZipId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ZipSferaZip_Zip">
+          <End Role="Zip" Type="Self.Zip" Multiplicity="0..1" />
+          <End Role="ZipSferaZip" Type="Self.ZipSferaZip" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zip">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ZipSferaZip">
+              <PropertyRef Name="ZipId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище ZippersModelContainer">
+          <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Manager" EntityType="Self.Manager" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderManager" EntityType="Self.OrderManager" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Owner" EntityType="Self.Owner" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SferaZip" EntityType="Self.SferaZip" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TypeZip" EntityType="Self.TypeZip" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Zip" EntityType="Self.Zip" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ZipSferaZip" EntityType="Self.ZipSferaZip" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Order_Client" Association="Self.FK_Order_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Zip" Association="Self.FK_Order_Zip">
+            <End Role="Zip" EntitySet="Zip" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderManager_Manager" Association="Self.FK_OrderManager_Manager">
+            <End Role="Manager" EntitySet="Manager" />
+            <End Role="OrderManager" EntitySet="OrderManager" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderManager_Order" Association="Self.FK_OrderManager_Order">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="OrderManager" EntitySet="OrderManager" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TypeZip_Owner" Association="Self.FK_TypeZip_Owner">
+            <End Role="Owner" EntitySet="Owner" />
+            <End Role="TypeZip" EntitySet="TypeZip" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Zip_TypeZip" Association="Self.FK_Zip_TypeZip">
+            <End Role="TypeZip" EntitySet="TypeZip" />
+            <End Role="Zip" EntitySet="Zip" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ZipSferaZip_SferaZip" Association="Self.FK_ZipSferaZip_SferaZip">
+            <End Role="SferaZip" EntitySet="SferaZip" />
+            <End Role="ZipSferaZip" EntitySet="ZipSferaZip" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ZipSferaZip_Zip" Association="Self.FK_ZipSferaZip_Zip">
+            <End Role="Zip" EntitySet="Zip" />
+            <End Role="ZipSferaZip" EntitySet="ZipSferaZip" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ZippersModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Age" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Order" Relationship="Self.FK_Order_Client" FromRole="Client" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="Manager">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Age" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="OrderManager" Relationship="Self.FK_OrderManager_Manager" FromRole="Manager" ToRole="OrderManager" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="ClientId" Type="Int32" />
+          <Property Name="ZipId" Type="Int32" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_Order_Client" FromRole="Order" ToRole="Client" />
+          <NavigationProperty Name="Zip" Relationship="Self.FK_Order_Zip" FromRole="Order" ToRole="Zip" />
+          <NavigationProperty Name="OrderManager" Relationship="Self.FK_OrderManager_Order" FromRole="Order" ToRole="OrderManager" />
+        </EntityType>
+        <EntityType Name="OrderManager">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="ManagerId" Type="Int32" />
+          <Property Name="OrderId" Type="Int32" />
+          <NavigationProperty Name="Manager" Relationship="Self.FK_OrderManager_Manager" FromRole="OrderManager" ToRole="Manager" />
+          <NavigationProperty Name="Order" Relationship="Self.FK_OrderManager_Order" FromRole="OrderManager" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="Owner">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="FirstName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Age" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="TypeZip" Relationship="Self.FK_TypeZip_Owner" FromRole="Owner" ToRole="TypeZip" />
+        </EntityType>
+        <EntityType Name="SferaZip">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ZipSferaZip" Relationship="Self.FK_ZipSferaZip_SferaZip" FromRole="SferaZip" ToRole="ZipSferaZip" />
+        </EntityType>
+        <EntityType Name="TypeZip">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OwnerId" Type="Int32" />
+          <NavigationProperty Name="Owner" Relationship="Self.FK_TypeZip_Owner" FromRole="TypeZip" ToRole="Owner" />
+          <NavigationProperty Name="Zip" Relationship="Self.FK_Zip_TypeZip" FromRole="TypeZip" ToRole="Zip" />
+        </EntityType>
+        <EntityType Name="Zip">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TypeZipId" Type="Int32" />
+          <Property Name="Color" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="PurposeId" Type="Int32" />
+          <NavigationProperty Name="Order" Relationship="Self.FK_Order_Zip" FromRole="Zip" ToRole="Order" />
+          <NavigationProperty Name="TypeZip" Relationship="Self.FK_Zip_TypeZip" FromRole="Zip" ToRole="TypeZip" />
+          <NavigationProperty Name="ZipSferaZip" Relationship="Self.FK_ZipSferaZip_Zip" FromRole="Zip" ToRole="ZipSferaZip" />
+        </EntityType>
+        <EntityType Name="ZipSferaZip">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="ZipId" Type="Int32" />
+          <Property Name="SferaZipId" Type="Int32" />
+          <NavigationProperty Name="SferaZip" Relationship="Self.FK_ZipSferaZip_SferaZip" FromRole="ZipSferaZip" ToRole="SferaZip" />
+          <NavigationProperty Name="Zip" Relationship="Self.FK_ZipSferaZip_Zip" FromRole="ZipSferaZip" ToRole="Zip" />
+        </EntityType>
+        <Association Name="FK_Order_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="0..1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="ClientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderManager_Manager">
+          <End Role="Manager" Type="Self.Manager" Multiplicity="0..1" />
+          <End Role="OrderManager" Type="Self.OrderManager" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Manager">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderManager">
+              <PropertyRef Name="ManagerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Order_Zip">
+          <End Role="Zip" Type="Self.Zip" Multiplicity="0..1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zip">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="ZipId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderManager_Order">
+          <End Role="Order" Type="Self.Order" Multiplicity="0..1" />
+          <End Role="OrderManager" Type="Self.OrderManager" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Order">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="OrderManager">
+              <PropertyRef Name="OrderId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_TypeZip_Owner">
+          <End Role="Owner" Type="Self.Owner" Multiplicity="0..1" />
+          <End Role="TypeZip" Type="Self.TypeZip" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Owner">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="TypeZip">
+              <PropertyRef Name="OwnerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ZipSferaZip_SferaZip">
+          <End Role="SferaZip" Type="Self.SferaZip" Multiplicity="0..1" />
+          <End Role="ZipSferaZip" Type="Self.ZipSferaZip" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SferaZip">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ZipSferaZip">
+              <PropertyRef Name="SferaZipId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Zip_TypeZip">
+          <End Role="TypeZip" Type="Self.TypeZip" Multiplicity="0..1" />
+          <End Role="Zip" Type="Self.Zip" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="TypeZip">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Zip">
+              <PropertyRef Name="TypeZipId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ZipSferaZip_Zip">
+          <End Role="Zip" Type="Self.Zip" Multiplicity="0..1" />
+          <End Role="ZipSferaZip" Type="Self.ZipSferaZip" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zip">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ZipSferaZip">
+              <PropertyRef Name="ZipId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ZippersEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Client" EntityType="Self.Client" />
+          <EntitySet Name="Manager" EntityType="Self.Manager" />
+          <EntitySet Name="Order" EntityType="Self.Order" />
+          <EntitySet Name="OrderManager" EntityType="Self.OrderManager" />
+          <EntitySet Name="Owner" EntityType="Self.Owner" />
+          <EntitySet Name="SferaZip" EntityType="Self.SferaZip" />
+          <EntitySet Name="TypeZip" EntityType="Self.TypeZip" />
+          <EntitySet Name="Zip" EntityType="Self.Zip" />
+          <EntitySet Name="ZipSferaZip" EntityType="Self.ZipSferaZip" />
+          <AssociationSet Name="FK_Order_Client" Association="Self.FK_Order_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderManager_Manager" Association="Self.FK_OrderManager_Manager">
+            <End Role="Manager" EntitySet="Manager" />
+            <End Role="OrderManager" EntitySet="OrderManager" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Order_Zip" Association="Self.FK_Order_Zip">
+            <End Role="Zip" EntitySet="Zip" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderManager_Order" Association="Self.FK_OrderManager_Order">
+            <End Role="Order" EntitySet="Order" />
+            <End Role="OrderManager" EntitySet="OrderManager" />
+          </AssociationSet>
+          <AssociationSet Name="FK_TypeZip_Owner" Association="Self.FK_TypeZip_Owner">
+            <End Role="Owner" EntitySet="Owner" />
+            <End Role="TypeZip" EntitySet="TypeZip" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ZipSferaZip_SferaZip" Association="Self.FK_ZipSferaZip_SferaZip">
+            <End Role="SferaZip" EntitySet="SferaZip" />
+            <End Role="ZipSferaZip" EntitySet="ZipSferaZip" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Zip_TypeZip" Association="Self.FK_Zip_TypeZip">
+            <End Role="TypeZip" EntitySet="TypeZip" />
+            <End Role="Zip" EntitySet="Zip" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ZipSferaZip_Zip" Association="Self.FK_ZipSferaZip_Zip">
+            <End Role="Zip" EntitySet="Zip" />
+            <End Role="ZipSferaZip" EntitySet="ZipSferaZip" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище ZippersModelContainer" CdmEntityContainer="ZippersEntities">
+          <EntitySetMapping Name="Client">
+            <EntityTypeMapping TypeName="ZippersModel.Client">
+              <MappingFragment StoreEntitySet="Client">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Manager">
+            <EntityTypeMapping TypeName="ZippersModel.Manager">
+              <MappingFragment StoreEntitySet="Manager">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Order">
+            <EntityTypeMapping TypeName="ZippersModel.Order">
+              <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="ZipId" ColumnName="ZipId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderManager">
+            <EntityTypeMapping TypeName="ZippersModel.OrderManager">
+              <MappingFragment StoreEntitySet="OrderManager">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="ManagerId" ColumnName="ManagerId" />
+                <ScalarProperty Name="OrderId" ColumnName="OrderId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Owner">
+            <EntityTypeMapping TypeName="ZippersModel.Owner">
+              <MappingFragment StoreEntitySet="Owner">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SferaZip">
+            <EntityTypeMapping TypeName="ZippersModel.SferaZip">
+              <MappingFragment StoreEntitySet="SferaZip">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TypeZip">
+            <EntityTypeMapping TypeName="ZippersModel.TypeZip">
+              <MappingFragment StoreEntitySet="TypeZip">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="OwnerId" ColumnName="OwnerId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Zip">
+            <EntityTypeMapping TypeName="ZippersModel.Zip">
+              <MappingFragment StoreEntitySet="Zip">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="TypeZipId" ColumnName="TypeZipId" />
+                <ScalarProperty Name="Color" ColumnName="Color" />
+                <ScalarProperty Name="PurposeId" ColumnName="PurposeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ZipSferaZip">
+            <EntityTypeMapping TypeName="ZippersModel.ZipSferaZip">
+              <MappingFragment StoreEntitySet="ZipSferaZip">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ZipId" ColumnName="ZipId" />
+                <ScalarProperty Name="SferaZipId" ColumnName="SferaZipId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
